@@ -83,11 +83,12 @@ int Max_Heap::get_element(int i){
 
 void Max_Heap::heapify(int i){
     int x = i;
-    int left_idx = 2*i+1;
-    int right_idx = 2*i+2;
+    int left_idx = get_leftChildIdx(i);
+    int right_idx = get_rightChildIdx(i);
+    int elem = get_element(i);
     
-    if(left_idx < size && get_left_child(i) > get_element(i)) x = left_idx;
-    if(right_idx < size && get_right_child(i) > get_element(i)) x = right_idx;
+    if(left_idx < size && get_left_child(i) > elem) x = left_idx;
+    if(right_idx < size && get_right_child(i) > elem) x = right_idx;
     if(x != i){
         swap(x, i);
         heapify(x);
@@ -95,7 +96,6 @@ void Max_Heap::heapify(int i){
 }
 
 void Max_Heap::insert(int n){
-    int old_size = size;
     if(size == 0){
         *(heap_e) = n;
         size++;
